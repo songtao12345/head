@@ -28,3 +28,11 @@ export function submitImage(data) {
         data
     })
 }
+
+// 删除图片素材
+export function deleteImage(target) {
+    return request({
+        method: 'delete',
+        url: `/mp/v1_0/user/images/${target}`
+    })
+}

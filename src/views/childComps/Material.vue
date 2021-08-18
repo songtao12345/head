@@ -23,7 +23,7 @@
                            'el-icon-star-on' : item.is_collected,
                            'el-icon-star-off': !item.is_collected
                         }" @click="collectClick(item)"></i>
-                        <i class="el-icon-delete-solid"></i>
+                        <i class="el-icon-delete-solid" @click="deleteImageInfo(item)"></i>
                         <!-- <div @click="collectClick(item)">
                         <i v-if="imageParams.collect" class="el-icon-star-on" ></i>
                         <i v-else class="el-icon-star-off"></i>
@@ -68,7 +68,7 @@
 </template>
 
 <script>
-import {getImageList, collectImage} from 'network/image.js'
+import {getImageList, collectImage, deleteImage} from 'network/image.js'
 export default {
     name: 'Material',
     data() {
@@ -95,6 +95,14 @@ export default {
              this.images = res.data.data.results
              this.total = res.data.data.total_count
           })
+       },
+       deleteImageInfo(item) {
+          console.log(item.id)
+         deleteImage(item.id).then(res => {
+            console.log(res)
+            this.getImage()
+         })
+
        },
       //  getAll() {
       //     this.imageParams.collect = false,
