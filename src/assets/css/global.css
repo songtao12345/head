@@ -1,0 +1,13 @@
+html,body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.el-breadcrumb {
+    margin-bottom: 30px;
+}
+
+.ql-editor { 
+    min-height: 300px; 
+}
