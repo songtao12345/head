@@ -6,7 +6,9 @@
         
          <el-dialog title="选择封面" :visible.sync="imageDialogVisible" width="50%">
             <el-tabs v-model="activeName" type="card">
-                <el-tab-pane label="素材库" name="first">素材库</el-tab-pane>
+                <el-tab-pane label="素材库" name="first">
+                    <material-image ref="mater" :image-status="false" :bottom-status="false"></material-image>
+                </el-tab-pane>
                 <el-tab-pane label="上传图片" name="second">
                     <input type="file" @change="imageChange" ref="file">
                     <div>
@@ -24,9 +26,13 @@
 </template>
 
 <script>
+import MaterialImage from 'components/content/MaterialImage'
 import {submitImage} from 'network/image.js'
 export default {
     name: 'UploadImage',
+    components: {
+        MaterialImage
+    },
     props: ['coverImage'],
     data() {
         return {
@@ -70,6 +76,21 @@ export default {
                     this.loadingStatus = true
 
                  })
+            }else if(this.activeName === 'first') {
+                
+                const selected = this.$refs.mater.selectId
+                console.log(this.$refs.mater.images[selected].url)
+                if(!selected === null) {
+                    this.$message('请选择封面')
+                    return
+                }
+                console.log(this.fileObj)
+                this.imageDialogVisible = false
+                this.loadingStatus = false
+                this.imageSrc = this.$refs.mater.images[selected].url
+                // this.$emit('imageSubmit',this.$refs.mater.images[selected].url)
+             
+            
             }
            
         }
