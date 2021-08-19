@@ -29,8 +29,8 @@ import Vue from 'vue'
 export default {
     name: 'Login',
     created() {
-        this.loginForm.mobile = window.sessionStorage.getItem('mobile')
-        this.loginForm.code = window.sessionStorage.getItem('code')
+        this.loginForm.mobile = window.localStorage.getItem('mobile')
+        this.loginForm.code = window.localStorage.getItem('code')
     },
     data() {
         return {
@@ -59,8 +59,8 @@ export default {
                     { validator : (rule, value, callback) => {
                         console.log(value)
                         if(value) {
-                            window.sessionStorage.setItem('mobile',this.loginForm.mobile)
-                            window.sessionStorage.setItem('code',this.loginForm.code)
+                            window.localStorage.setItem('mobile',this.loginForm.mobile)
+                            window.localStorage.setItem('code',this.loginForm.code)
                         }
                         callback() //域验证通过
                     } , message: '请输入验证码', trigger: 'blur' }
